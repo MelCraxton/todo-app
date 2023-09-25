@@ -1,0 +1,8 @@
+/venv/
+.idea
+/to_do_app/Exercises/
+/to_do_app/bonus/
+/to_do_app/files/
+/to_do_app/journal/
+/to_do_app/experiments/
+/main.py
