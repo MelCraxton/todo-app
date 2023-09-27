@@ -2,11 +2,28 @@ import functions
 import PySimpleGUI as sg
 
 label = sg.Text('Type in a to-do')
-input_box = sg.InputText(tooltip='Enter todo')
+input_box = sg.InputText(tooltip='Enter todo', key='todo')
 add_button = sg.Button("Add")
 
-# [[label], [input_box]] means the one element will exist underneath the other
-window = sg.Window('My To-Do App', layout=[[label], [input_box, add_button]])
-window.read()
+# [[label], [input_box, add_button]] means the one element will exist underneath the other
+window = sg.Window('My To-Do App',
+                   layout=[[label], [input_box, add_button]],
+                   font=('Helvetica', 10))
+while True:
+    event, values = window.read()
+    print(event)
+    print(values)
+    '''could also do the below
+    event = window.read()
+    print(event[1]["todo"])'''
+    match event:
+        case "Add":
+            todos = functions.get_todos()
+            new_todo = values['todo'] + '\n'
+            todos.append(new_todo)
+            functions.write_todos(todos)
+        case sg.WIN_CLOSED:
+            break
+
 window.close()
 
